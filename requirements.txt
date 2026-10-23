@@ -6,4 +6,4 @@ langchain-huggingface>=0.1
 chromadb>=1.5
 sentence-transformers>=5.0
 pypdf>=6.0
-streamlit>=1.40
+streamlit[pdf]>=1.66

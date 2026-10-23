@@ -18,7 +18,7 @@ A local question-answering application for Enso Group's HR manual. **Repository:
 | Chunking | LangChain `RecursiveCharacterTextSplitter` | Split pages into 900-character chunks with 150-character overlap |
 | Embeddings | Sentence Transformers `all-MiniLM-L6-v2` via `HuggingFaceEmbeddings` | Create local semantic vectors |
 | Vector database | ChromaDB with LangChain Chroma integration | Persistent vector storage and similarity search |
-| User interface | Streamlit | Local web interface for questions and sourced answers |
+| User interface | Streamlit | Interactive local web interface with a cited-page PDF viewer |
 
 ## RAG workflow
 
@@ -48,6 +48,8 @@ HR-policy-assis/
 ├── requirements.txt               # Python dependencies
 ├── README.md                      # Project and run instructions
 ├── .gitignore                     # Excludes secrets and generated files
+├── .streamlit/
+│   └── config.toml                # App theme
 ├── data/
 │   ├── source/
 │   │   └── hr_manual.pdf          # Source HR manual
@@ -90,7 +92,7 @@ Start Streamlit in the project folder:
 streamlit run app.py
 ```
 
-Open the local URL printed by Streamlit, usually <http://localhost:8501>. Enter a question and select **Ask**.
+Open the local URL printed by Streamlit, usually <http://localhost:8501>. Enter a question and select **Search the manual**. Each source reference has a **View page** button that opens that exact PDF page in the app. The PDF viewer is installed by `streamlit[pdf]` in `requirements.txt`. Restart Streamlit after installing dependencies so it registers the viewer; if it is unavailable, the app offers a one-page PDF download instead.
 
 ## Test questions and observed answers
 
@@ -108,39 +110,45 @@ These results were checked against the manual and captured from the running Stre
 
 ## Application screenshots
 
-The screenshots below show the entered question and the result rendered by the local application.
+These screenshots were captured from the updated local app. They show both the answer and, where included, the **View page** action opening the cited PDF page.
 
 <details>
-<summary>Question 1 — Privilege Leave</summary>
+<summary>Question 1 — Privilege Leave: 12 days, page 60</summary>
 
-![Streamlit result for the Privilege Leave question](screenshots/q1-privilege-leave.png)
+![Privilege Leave answer in the updated app](screenshots/q1-privilege-leave-answer.png)
+
+![Privilege Leave source page 60 open in the PDF viewer](screenshots/q1-privilege-leave-page-60.png)
 
 </details>
 
 <details>
-<summary>Question 2 — Probation period</summary>
+<summary>Question 2 — Probation period: 3 months, page 42</summary>
 
-![Streamlit result for the probation question](screenshots/q2-probation-period.png)
+![Probation answer in the updated app](screenshots/q2-probation-answer.png)
 
-</details>
-
-<details>
-<summary>Question 3 — Health-insurance premium</summary>
-
-![Streamlit result for the health-insurance premium question](screenshots/q3-health-insurance-premium.png)
+![Probation source page 42 open in the PDF viewer](screenshots/q2-probation-page-42.png)
 
 </details>
 
 <details>
-<summary>Question 4 — GST rate</summary>
+<summary>Question 3 — Health-insurance premium: Not found</summary>
 
-![Streamlit result for the GST question](screenshots/q4-gst-rate.png)
+![Unsupported insurance premium question in the updated app](screenshots/q3-health-insurance-premium.png)
 
 </details>
 
 <details>
-<summary>Question 5 — Maternity leave</summary>
+<summary>Question 4 — GST rate: Not found</summary>
 
-![Streamlit result for the maternity leave question](screenshots/q5-maternity-leave.png)
+![Unsupported GST question in the updated app](screenshots/q4-gst-rate.png)
+
+</details>
+
+<details>
+<summary>Question 5 — Maternity leave: 12 weeks (90 days), page 62</summary>
+
+![Maternity leave answer in the updated app](screenshots/q5-maternity-answer.png)
+
+![Maternity leave source page 62 open in the PDF viewer](screenshots/q5-maternity-page-62.png)
 
 </details>
