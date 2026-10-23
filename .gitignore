@@ -1,0 +1,25 @@
+# Python environments and bytecode
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+secrets.toml
+*.pem
+*.key
+
+# Generated local data and logs
+data/chroma/
+*.log
+
+# Operating system files
+.DS_Store
+
+# Local assistant skill links
+.agents/skills/developing-with-streamlit
+.claude/skills/developing-with-streamlit
